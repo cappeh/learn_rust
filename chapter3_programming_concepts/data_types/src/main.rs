@@ -19,4 +19,26 @@ fn main() {
     let _heart_eyed_cat = '😻';
     let _c: char = 'c';
 
+    let tup: (i32, f64, u8) = (500, 6.4, 1); // can also be written as "let tup = (500, 6.4, 1)"
+    let (_x, y, _z) = tup;
+    println!("The value of y is: {y}"); // prints 6.4
+
+    let _five_hundred = tup.0; // access the first element in the tuple: tup
+
+    // () 
+    // this is the unit tuple. represents an empty value or empty return type
+    // expressions implicitly return the unit value if they dont return any other value
+    // an expression evaluates to a value such as x + y
+
+    let _months = ["January", "February", "March", "April", "May", "June", "July",
+                   "August", "September", "October", "November", "December"];
+
+    let _a: [i32; 5] = [1, 2, 3, 4, 5]; // writes the type of each element and the number of
+                                        // elements in the array type = i32, 5 elements in the
+                                        // array
+
+    let _b = [3; 5]; // = [3, 3, 3, 3, 3]
+
+    let _april = _months[3];
+    let _december = _months[_months.len() - 1];
 }
