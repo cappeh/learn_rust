@@ -1,3 +1,5 @@
+use std::io;
+
 fn main() {
     let _num: u32 = "96".parse().expect("not a number!");
     let _num2 = "42".parse::<i32>().unwrap(); // turbofish syntax
@@ -41,4 +43,23 @@ fn main() {
 
     let _april = _months[3];
     let _december = _months[_months.len() - 1];
+
+    {
+        let c: [i32; 5] = [2, 4, 6, 8, 10];
+        println!("Choose an array index");
+
+        let mut index = String::new();
+
+        io::stdin().read_line(&mut index).expect("failed to read line");
+
+        // a usize is required here because it guaranteed to be large enough to represent any
+        // memory address on the system
+        // if you used a u32 for example on a large array it may not be able to represent the
+        // memory address
+        let index: usize = index.trim().parse().expect("Not a number!");
+
+        let val = c[index];
+
+        println!("The value at index: {index} is: {val}");
+    }
 }
