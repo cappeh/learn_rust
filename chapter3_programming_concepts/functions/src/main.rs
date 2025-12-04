@@ -5,6 +5,13 @@ fn main() {
     another_function(); // calls another_function
     another_function_with_paramater(5);
     print_labeled_measurement(5, 'h'); // char should be in '' (single quotes)
+
+    let _y = 6; // this is a statement
+
+    let _x = {
+        let y = 3;
+        y + 1
+    }; // this is an expression within a statement
 }
 
 // could be placed before the main function. you can define functions anywhere as long as they are
