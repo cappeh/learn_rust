@@ -17,4 +17,8 @@ fn main() {
         println!("number is not divisible by 4,3 or 2");
     }
 
+    let condition = true;
+    let value = if condition { 5 } else { 6 }; // if and else blocks must have the same type
+    println!("The value of value is: {value}");
+
 }
