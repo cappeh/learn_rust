@@ -1,16 +1,15 @@
-fn fibonacci(nths: i32) {
-    let mut a = 0;
-    let mut b = 1;
-
-    println!("{a}");
-    for _ in 1..=nths {
-        let next = a + b;
-        a = b;
-        b = next;
-        println!("{a}");
+fn fibonacci(nth: u64) -> u64 {
+    if nth < 2 {
+        return nth;
     }
+    let mut fib = (0, 1);
+
+    for _ in 1..=nth {
+        fib = (fib.1, fib.0 + fib.1);
+    }
+    fib.0
 }
 
 fn main() {
-    fibonacci(5);
+    println!("fibonacci({}) is: {}", 10, fibonacci(10));
 }
