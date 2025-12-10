@@ -10,4 +10,20 @@ fn main() {
         let s = "hello"; // s is valid from this point onwards
         println!("{s}"); // make use of s in its current scope
     } // the scope ends and s is no longer valid
+
+    // the ::from is a namespaced function (associative?)
+    // this will allocate memory on the heap
+    let mut s = String::from("Hello");
+    s.push_str(", World"); // the String type is mutable
+    println!("{s}");
+
+    let x = 5;
+    let _y = x; // the value of x is copied into y
+
+    let s1 = String::from("hello");
+    let _s2 = s1; // s1 is no longer valid from this point
+
+    // this println line would cause an error "value borrowed here after move" as it is no longer
+    // valid
+    // println!("{s1}, world");
 }
