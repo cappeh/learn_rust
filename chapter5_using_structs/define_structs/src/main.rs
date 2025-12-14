@@ -6,7 +6,7 @@ struct User {
 }
 
 fn build_user(email: String, username: String) -> User {
-    User { active: false, username: username, email: email, sign_in_count: 1 }
+    User { active: false, username, email, sign_in_count: 1 }
 }
 
 fn main() {
