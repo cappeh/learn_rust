@@ -44,6 +44,26 @@ fn main() {
     let six = plus_one(five);
     let none = plus_one(None);
 
+    println!("{five:?}");
     println!("{six:?}");
     println!("{none:?}");
+
+    let some_number = 10;
+
+    match some_number {
+        1 => println!("number 1"),
+        2 => println!("number 2"),
+        _ => ()
+    }
+
+    let config_max = Some(3u8);
+    match config_max {
+        Some(max) => println!("The maximum is configured to be: {max}"),
+        _ => ()
+    }
+
+    let config_max = Some(32u8);
+    if let Some(max) = config_max {
+        println!("The maximum is configured to be: {max}");
+    }
 }
