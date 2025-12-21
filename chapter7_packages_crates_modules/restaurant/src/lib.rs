@@ -2,23 +2,22 @@
 mod front_of_house {
     pub mod hosting {
         pub fn add_to_waitlist() {}
-        fn seat_at_table() {}
-    }
-
-    mod serving {
-        fn take_order() {}
-        fn serve_order() {}
-        fn take_payment() {}
     }
 }
 
-#[allow(dead_code)]
-fn eat_at_restaurant() {
-    front_of_house::hosting::add_to_waitlist();
+// use crate::front_of_house::hosting;
 
-    let mut meal = back_of_house::Breakfast::summer("Rye");
-    meal.toast = String::from("Wheat");
-    println!("{meal:?}");
+mod customer {
+    #[allow(dead_code)]
+    pub fn eat_at_restaurant() {
+        // super::hosting::add_to_waitlist(); // if you want to keep the use outside the module
+        use crate::front_of_house::hosting; // the idiomatic way to bring a function into scope
+        hosting::add_to_waitlist();
+
+        let mut meal = crate::back_of_house::Breakfast::summer("Rye");
+        meal.toast = String::from("Wheat");
+        println!("{meal:?}");
+    }
 }
 
 #[allow(dead_code)]
