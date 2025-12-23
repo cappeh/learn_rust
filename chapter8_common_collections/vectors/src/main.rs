@@ -34,5 +34,11 @@ fn main() {
 
     {
         let _v5 = vec![10, 20, 30];
+        let second = _v5[1];
+        println!("The second element in _v5 is: {second}");
+        println!("{_v5:?}")
     } // v5 and all its values are dropped when the scope ends
+
+    let v6 = vec![String::from("first"), String::from("second"), String::from("third")];
+    let _last = &v6[2];
 }
