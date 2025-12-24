@@ -17,4 +17,10 @@ fn main() {
 
     let hello_world = format!("{hello} {world}");
     println!("{hello_world}");
+
+    let h = hello.chars().nth(0);
+    println!("{h:?}");
+
+    let w = world.bytes().nth(0);
+    println!("{w:?}");
 }
