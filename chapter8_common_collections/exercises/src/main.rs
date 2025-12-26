@@ -6,49 +6,50 @@ fn prompt(msg: &str) {
     io::stdout().flush().unwrap();
 }
 
-fn get_user_input() -> String {
+fn input() -> String {
     let mut input = String::new();
-    io::stdin().read_line(&mut input).expect("Failed to Read Input");
+    io::stdin().read_line(&mut input).expect("failed to read input");
     input.trim().to_string()
 }
 
 fn main() {
-    let mut employees: HashMap<String, Vec<String>> = HashMap::new();
+    let mut company: HashMap<String, Vec<String>> = HashMap::new();
 
     loop {
-        println!("1) Add Employee, 2) List Department or 3) Quit");
-        prompt("Choose an Option: ");
-
-        let choice = get_user_input();
+        println!("1) add new employee");
+        println!("2) list department");
+        println!("3) quit");
+        
+        prompt("enter an option: ");
+        let choice = input();
 
         match choice.as_str() {
-           "1" => {
-                prompt("Enter Employee Name: ");
-                let name = get_user_input();
+            "1" => {
+                prompt("enter employee name: ");
+                let name = input();
 
-                prompt("Enter Employee Department: ");
-                let department = get_user_input();
+                prompt("enter employee department");
+                let dept = input();
 
-                employees.entry(department).or_insert(Vec::new()).push(name);
-           } 
-           "2" => {
-               prompt("Enter Department to List Employees");
-               let department = get_user_input();
-               
-               if let Some(list) = employees.get(&department) {
-                   let mut list = list.clone();
-                   list.sort();
-                   println!("List of Employees for: {department}, {list:?}");
-               } else {
-                   println!("No Such Department");
-               }
-           }
-           "3" => {
-               println!("Exit");
-               break;
-           }
-           _ => println!("Invalid Choice"),
+                company.entry(dept).or_insert(Vec::new()).push(name);
+            }
+            "2" => {
+                prompt("enter department to list");
+                let dept_list = input();
+
+                if let Some(list) = company.get(&dept_list) {
+                    let list = list.clone().sort();
+                    println!("{dept_list} department: {list:?}");
+                } else {
+                    println!("department does not exist");
+                }
+            }
+            "3" => {
+                println!("exit application");
+                break;
+            }
+            _ => println!("invalid option... try again")
         }
-    }
 
+    }
 }
