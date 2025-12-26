@@ -1,36 +1,54 @@
 use std::collections::HashMap;
+use std::io::{self, Write};
+
+fn prompt(msg: &str) {
+    print!("{msg}");
+    io::stdout().flush().unwrap();
+}
+
+fn get_user_input() -> String {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Failed to Read Input");
+    input.trim().to_string()
+}
 
 fn main() {
-    let mut numbers = vec![1, 7, 98, 7, 73, 98, 4, 1, 7, 52, 18, 32, 4, 76];
-    numbers.sort();
+    let mut employees: HashMap<String, Vec<String>> = HashMap::new();
 
-    let median = if numbers.len() % 2 == 1 {
-        numbers[numbers.len() / 2]
-    } else {
-        let mid = numbers.len() / 2;
-        (numbers[mid - 1] + numbers[mid]) / 2
-    };
+    loop {
+        println!("1) Add Employee, 2) List Department or 3) Quit");
+        prompt("Choose an Option: ");
 
-    println!("Median: {median}");
-    
-    let mut number_map = HashMap::new();
+        let choice = get_user_input();
 
-    for &num in &numbers {
-        let count = number_map.entry(num).or_insert(0);
-        *count += 1;
-    }
+        match choice.as_str() {
+           "1" => {
+                prompt("Enter Employee Name: ");
+                let name = get_user_input();
 
-    let mut max_value = numbers[0];
-    let mut max_count = 0;
+                prompt("Enter Employee Department: ");
+                let department = get_user_input();
 
-    for (&key, &val) in &number_map {
-        if val > max_count {
-            max_count = val;
-            max_value = key;
+                employees.entry(department).or_insert(Vec::new()).push(name);
+           } 
+           "2" => {
+               prompt("Enter Department to List Employees");
+               let department = get_user_input();
+               
+               if let Some(list) = employees.get(&department) {
+                   let mut list = list.clone();
+                   list.sort();
+                   println!("List of Employees for: {department}, {list:?}");
+               } else {
+                   println!("No Such Department");
+               }
+           }
+           "3" => {
+               println!("Exit");
+               break;
+           }
+           _ => println!("Invalid Choice"),
         }
     }
 
-    println!("Mode: {max_value}: {max_count}");
-
-    println!("{number_map:?}");
 }
