@@ -16,4 +16,23 @@ fn main() {
         }
     };
 
+    let _closure_greeting_file = File::open("hello.txt").unwrap_or_else(|error| {
+        if error.kind() == ErrorKind::NotFound {
+            File::create("hello.txt").unwrap_or_else(|error| {
+                panic!("problem creating the file: {error:?}");
+            })
+        } else {
+            panic!("problem opening the file: {error:?}");
+        }
+    });
+
+    // if successful the value contained in Ok will be returned
+    // if an error occurs, the panic! macro is called with panic message provided by the Err value
+    let _greeting_file_unwrap = File::open("hello.txt").unwrap();
+
+    // if successful the value contained in Ok will be returned
+    // if an error occurs panic! is called with the provided error message and message contained
+    // in the Err value
+    let _greeting_file_expect = File::open("hello.txt").expect("hello.txt not in project");
+
 }
