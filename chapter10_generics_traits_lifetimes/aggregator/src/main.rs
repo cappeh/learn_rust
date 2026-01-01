@@ -1,4 +1,4 @@
-use aggregator::{NewsArticle, SocialPost, Summary, SummaryAuthor};
+use aggregator::{NewsArticle, SocialPost, Summary, SummaryAuthor, notify};
 
 fn main() {
     let post = SocialPost {
@@ -23,4 +23,7 @@ fn main() {
 
     println!("News Article available! {}", article.summarize());
     println!("Another article available: {}", article.summarize_2());
+
+    notify(&post);
+    notify(&article);
 }

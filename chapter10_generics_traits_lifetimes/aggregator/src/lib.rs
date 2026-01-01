@@ -44,3 +44,7 @@ impl SummaryAuthor for SocialPost {
         format!("@{}", self.username)
     }
 }
+
+pub fn notify(item: &impl Summary) {
+    println!("Breaking News! {}", item.summarize());
+}
