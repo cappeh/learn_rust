@@ -1,4 +1,4 @@
-use aggregator::{NewsArticle, SocialPost, Summary};
+use aggregator::{NewsArticle, SocialPost, Summary, SummaryAuthor};
 
 fn main() {
     let post = SocialPost {
@@ -10,6 +10,7 @@ fn main() {
     };
 
     println!("1 new post: {}", post.summarize());
+    println!("Another new post: {}", post.summarize_2());
 
     let article = NewsArticle {
         headline: String::from("Penguins win the Stanley Cup Championship!"),
@@ -21,4 +22,5 @@ fn main() {
     };
 
     println!("News Article available! {}", article.summarize());
+    println!("Another article available: {}", article.summarize_2());
 }
