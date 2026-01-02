@@ -45,6 +45,12 @@ impl SummaryAuthor for SocialPost {
     }
 }
 
-pub fn notify(item: &impl Summary) {
+// this is syntax sugar for a trait bound set below
+// pub fn notify(item: &impl Summary) {
+//     println!("Breaking News! {}", item.summarize());
+// }
+
+// this is a trait bound
+pub fn notify<T: Summary>(item: &T) {
     println!("Breaking News! {}", item.summarize());
 }
