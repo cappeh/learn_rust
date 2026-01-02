@@ -1,3 +1,5 @@
+// use std::fmt::{Debug, Display};
+
 pub trait Summary {
     fn summarize(&self) -> String {
         format!("(Read More...)")
@@ -54,3 +56,16 @@ impl SummaryAuthor for SocialPost {
 pub fn notify<T: Summary>(item: &T) {
     println!("Breaking News! {}", item.summarize());
 }
+
+// multiple trait bounds
+// pub fn notify(item: &(impl Summary + Display)) {}
+// pub fn notify<T: Summary + Display>(item: &T) {}
+
+
+// where clause allows a function signature to become less cluttered
+// especially if types need to implement many traits
+// fn some_function<T, U>(t: &T, u: &U) -> i32
+// where 
+//     T: Display + Clone,
+//     U: Clone + Debug,
+// {}
