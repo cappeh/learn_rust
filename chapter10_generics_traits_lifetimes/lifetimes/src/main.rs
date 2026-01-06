@@ -4,6 +4,23 @@ struct ImportantExcerpt<'a> {
     part: &'a str,
 }
 
+#[allow(dead_code)]
+impl<'a> ImportantExcerpt<'a> {
+    // lifetime elision rule 1 applies here, only one reference parameter so the compiler will
+    // assign a generic lifetime param
+    fn level(&self) -> i32 {
+        3
+    }
+
+    // lifetime elision rule 3 applies here, there are two parameters so each are assigned a
+    // lifetime param. Because &self is one, the output reference (return type &str) is assigned
+    // the same lifetime as &self
+    fn announce_and_return(&self, announcement: &str) -> &str {
+        println!("Attention Please: {announcement}");
+        self.part
+    }
+}
+
 fn main() {
     let string1 = String::from("long string is long");
     let x;
