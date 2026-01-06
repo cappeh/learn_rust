@@ -11,10 +11,15 @@ mod tests {
     // may have some functions to setup some operation. the test attribute differentiates from
     // those functions
     #[test] 
-    fn it_works() {
+    fn exploration() {
         let result = add(2, 2);
         assert_eq!(result, 4); // macro to assert the result
         // checks whether the two provided results are equal
+    }
+
+    #[test]
+    fn another() {
+        panic!("this test will fail");
     }
 }
 
