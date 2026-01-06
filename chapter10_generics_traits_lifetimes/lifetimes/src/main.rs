@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 #[derive(Debug)]
 #[allow(dead_code)]
 struct ImportantExcerpt<'a> {
@@ -51,3 +53,20 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 fn return_x<'a>(x: &'a str, _y: &str) -> &'a str {
     x
 }
+
+#[allow(dead_code)]
+// generics and lifetime params are used in the same list <>
+// the generic type T must be a type that implements the Display trait (where)
+fn longest_with_an_announcement<'a, T>(
+    x: &'a str,
+    y: &'a str,
+    ann: T,
+) -> &'a str
+where
+    T: Display,
+{
+    println!("Announcement: {ann}");
+    if x.len() > y.len() {x} else {y}
+}
+
+
