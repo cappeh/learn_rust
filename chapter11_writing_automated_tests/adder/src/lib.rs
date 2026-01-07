@@ -21,6 +21,17 @@ mod tests {
     fn another() {
         panic!("this test will fail");
     }
+
+    #[test]
+    fn check_result() -> Result<(), String> {
+        let result = add(2, 2);
+
+        if result == 5 {
+            Ok(())
+        } else {
+            Err(String::from("two plus two does not equal five"))
+        }
+    }
 }
 
 // use "cargo test" to run all tests in the project
