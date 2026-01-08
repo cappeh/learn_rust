@@ -19,6 +19,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn check_add_100_and_two() {
         let result = add_two(100);
         assert_eq!(result, 102);
