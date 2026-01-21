@@ -18,6 +18,31 @@ fn main() {
     println!("{}", add_one_v2(5));
     println!("{}", add_one_v3(8));
     println!("{}", add_one_v4(4));
+
+    // ==================================================================
+
+    // Borrowing immutably in a closure
+    let list = vec![1, 2, 3];
+    println!("Before defining closure: {list:?}");
+
+    let only_borrows = || println!("From closure: {list:?}");
+
+    println!("Before calling closure: {list:?}");
+    only_borrows();
+    println!("After calling closure: {list:?}");
+
+    // ==================================================================
+
+    // Borrowing Mutably
+    let mut list2 = vec![1, 2, 3];
+    println!("Before defining closure: {list2:?}");
+
+    let mut borrows_mutably = || list2.push(7);
+
+    borrows_mutably();
+    println!("After calling closure: {list2:?}");
+
+    // ==================================================================
 }
 
 fn add_one_v1(x: u32) -> u32 {
