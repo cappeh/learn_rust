@@ -43,6 +43,16 @@ fn main() {
     println!("After calling closure: {list2:?}");
 
     // ==================================================================
+
+    // moving a value/ taking ownership with threads
+    let list3 = vec![1, 2, 3];
+    println!("Before defining closurel: {list3:?}");
+
+    thread::spawn(move || println!("From thread: {list3:?}"))
+        .join()
+        .unwrap();
+
+    // ==================================================================
 }
 
 fn add_one_v1(x: u32) -> u32 {
