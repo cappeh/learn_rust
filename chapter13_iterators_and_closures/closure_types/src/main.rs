@@ -1,16 +1,12 @@
-fn add_one_v1(x: i32) -> i32 {
-    x + 1
-}
+use std::{thread, time::Duration};
 
 fn main() {
-    let add_one_v2 = |x: i32| -> i32 {
-        x + 1
+    let expensive_closure = |num: u32| -> u32 {
+        println!("calculating slowly...");
+        thread::sleep(Duration::from_secs(2));
+        num
     };
 
-    let add_one_v3 = |x: i32| x + 1;
-
-    let add_one_v4 = |x: i32| x + 1;
-
-
-    println!("{}", add_one_v2(4));
+    let closure = expensive_closure(5);
+    println!("{closure}");
 }
