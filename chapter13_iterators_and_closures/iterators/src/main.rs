@@ -32,4 +32,15 @@ mod tests {
 
         assert_eq!(total, 6);
     }
+
+    #[test]
+    fn iterator_map() {
+        let v1: Vec<i32> = vec![1, 2, 3];
+
+        // map produces another iterator. the closure takes each value and adds 1
+        // we need the collect method to consume the new iterator in to a new collection
+        let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();
+
+        assert_eq!(v2, vec![2, 3, 4]);
+    }
 }
