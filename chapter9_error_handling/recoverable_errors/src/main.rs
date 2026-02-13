@@ -1,4 +1,4 @@
-use std::{fs::{self, File}, io::{self, ErrorKind, Read}};
+use std::{fmt, fs::{self, File}, io::{self, ErrorKind, Read}};
 
 fn main() {
     let greeting_file_result = File::open("hello.txt");
@@ -35,6 +35,13 @@ fn main() {
     // in the Err value
     let _greeting_file_expect = File::open("hello.txt").expect("hello.txt not in project");
 
+    let greeting_file_5 = match read_username_from_file5() {
+        Ok(greet) => greet,
+        Err(e) => format!("error: {e}"),
+    };
+
+    println!("{greeting_file_5}");
+
 }
 
 #[allow(dead_code)]
@@ -57,6 +64,21 @@ fn read_username_from_file() -> Result<String, io::Error> {
     }
 }
 
+#[derive(Debug)]
+struct ReadError(io::Error);
+
+impl From<io::Error> for ReadError {
+    fn from(value: io::Error) -> Self {
+        ReadError(value)
+    }
+}
+
+impl fmt::Display for ReadError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
+
 #[allow(dead_code)]
 fn read_username_from_file2() -> Result<String, io::Error> {
     let mut username_file = File::open("hello.txt")?;
@@ -75,4 +97,11 @@ fn read_username_from_file3() -> Result<String, io::Error> {
 #[allow(dead_code)]
 fn read_username_from_file4() -> Result<String, io::Error> {
     fs::read_to_string("hello.txt")
+}
+
+fn read_username_from_file5() -> Result<String, ReadError> {
+    let mut username_file = File::open("hello2.txt")?;
+    let mut username = String::new();
+    username_file.read_to_string(&mut username)?;
+    Ok(username)
 }
