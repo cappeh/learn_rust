@@ -1,13 +1,39 @@
-use std::{error, fs::{self}, io};
+use std::{fs::File, io::{self, Read}};
+use std::fmt;
 
-type FileOpResult<T> = Result<T, Box<dyn error::Error>>;
+type FileOpResult<T> = Result<T, FileOpErr>;
 
-fn main() -> FileOpResult<()> {
+#[derive(Debug)]
+struct FileOpErr(io::Error);
+
+impl fmt::Display for FileOpErr {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "Operation Failed With Error: {}", self.0)
+    }
+}
+
+impl From<io::Error> for FileOpErr {
+    fn from(value: io::Error) -> Self {
+        FileOpErr(value)
+    }
+}
+
+impl std::error::Error for FileOpErr {}
+
+fn run() -> FileOpResult<()> {
     let user = read_username_from_file()?;
     println!("{user}");
     Ok(())
 }
 
-fn read_username_from_file() -> Result<String, io::Error> {
-    fs::read_to_string("hello.txt")
+fn main() {
+    if let Err(e) = run() {
+        eprintln!("{}", e);
+    }
+}
+
+fn read_username_from_file() -> FileOpResult<String> {
+    let mut username = String::new();
+    File::open("hello.txt")?.read_to_string(&mut username)?;
+    Ok(username)
 }
